@@ -62,7 +62,7 @@ export default function MainLayout({
 }: {
   children: React.ReactNode
 }) {
-  let hosts = ['Eric Gordon', 'Wes Mantooth']
+  let hosts = ['Brendan Keane', 'Claire Kurronen']
 
   return (
     <AudioProvider>
