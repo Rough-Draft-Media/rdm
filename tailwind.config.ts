@@ -7,7 +7,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Satoshi', ...defaultTheme.fontFamily.sans],
+        sans: ['Inter', ...defaultTheme.fontFamily.sans],
       },
       spacing: {
         18: '4.5rem',

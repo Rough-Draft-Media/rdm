@@ -1,3 +1,37 @@
 @tailwind base;
+@import url("https://use.typekit.net/yga3ynn.css");
+
+@font-face {
+    font-family: "inter-tight";
+    font-style: italic;
+    font-weight: 100 900;
+    font-display: optional;
+    src: url(/fonts/InterTight-Italic-VariableFont_wght.ttf) format("ttf");
+}
+
+@font-face {
+    font-family: "inter-tight";
+    font-style: normal;
+    font-weight: 100 900;
+    font-display: optional;
+    src: url(/fonts/InterTight-VariableFont_wght.ttf) format("ttf");
+}
+
+
+@layer base {
+    html {
+      font-family: "inter-tight", system-ui, sans-serif;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      font-family: "larken", system-ui, sans-serif;
+    }
+  }
+
+
 @tailwind components;
+
+
 @tailwind utilities;
+
+
+

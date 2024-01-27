@@ -6,7 +6,6 @@ import { AboutSection } from '@/components/AboutSection'
 import { AudioProvider } from '@/components/AudioProvider'
 import { AudioPlayer } from '@/components/player/AudioPlayer'
 import { TinyWaveFormIcon } from '@/components/TinyWaveFormIcon'
-import { Waveform } from '@/components/Waveform'
 import posterImage from '@/images/poster.png'
 
 function SpotifyIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
@@ -98,23 +97,14 @@ export default function MainLayout({
             <div className="absolute inset-0 rounded-lg ring-1 ring-inset ring-black/10 sm:rounded-xl lg:rounded-2xl" />
           </Link>
           <div className="mt-10 text-center lg:mt-12 lg:text-left">
-            <p className="text-xl font-bold text-slate-900">
-              <Link href="/">Their Side</Link>
-            </p>
+            <h1 className="text-xl font-bold text-slate-900">Can I Tell You Something?</h1>
             <p className="mt-3 text-lg font-medium leading-8 text-slate-700">
-              Conversations with the most tragically misunderstood people of our
-              time.
+              Thursdays at 3:00 PM PST
             </p>
           </div>
           <AboutSection className="mt-12 hidden lg:block" />
           <section className="mt-10 lg:mt-12">
-            <h2 className="sr-only flex items-center font-mono text-sm font-medium leading-7 text-slate-900 lg:not-sr-only">
-              <TinyWaveFormIcon
-                colors={['fill-indigo-300', 'fill-blue-300']}
-                className="h-2.5 w-2.5"
-              />
-              <span className="ml-2.5">Listen</span>
-            </h2>
+            <h2 className="flex items-center text-xl font-extrabold leading-7 text-slate-900">Listen</h2>
             <div className="h-px bg-gradient-to-r from-slate-200/0 via-slate-200 to-slate-200/0 lg:hidden" />
             <ul
               role="list"
@@ -144,7 +134,6 @@ export default function MainLayout({
         </div>
       </header>
       <main className="border-t border-slate-200 lg:relative lg:mb-28 lg:ml-112 lg:border-t-0 xl:ml-120">
-        <Waveform className="absolute left-0 top-0 h-20 w-full" />
         <div className="relative">{children}</div>
       </main>
       <footer className="border-t border-slate-200 bg-slate-50 py-10 pb-40 sm:py-16 sm:pb-32 lg:hidden">

@@ -20,15 +20,8 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full bg-white antialiased">
       <head>
-        <link
-          rel="preconnect"
-          href="https://cdn.fontshare.com"
-          crossOrigin="anonymous"
-        />
-        <link
-          rel="stylesheet"
-          href="https://api.fontshare.com/v2/css?f[]=satoshi@700,500,400&display=swap"
-        />
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'></link>
+        <link rel="stylesheet" href="https://use.typekit.net/yga3ynn.css"></link>
       </head>
       <body className="flex min-h-full">
         <div className="w-full">{children}</div>

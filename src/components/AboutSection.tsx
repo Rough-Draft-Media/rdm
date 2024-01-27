@@ -10,24 +10,14 @@ export function AboutSection(props: React.ComponentPropsWithoutRef<'section'>) {
 
   return (
     <section {...props}>
-      <h2 className="flex items-center font-mono text-sm font-medium leading-7 text-slate-900">
-        <TinyWaveFormIcon
-          colors={['fill-violet-300', 'fill-pink-300']}
-          className="h-2.5 w-2.5"
-        />
-        <span className="ml-2.5">About</span>
-      </h2>
+      <h2 className="flex items-center text-xl font-extrabold leading-7 text-slate-900">About</h2>
       <p
         className={clsx(
           'mt-2 text-base leading-7 text-slate-700',
           !isExpanded && 'lg:line-clamp-4',
         )}
       >
-        In this show, Eric and Wes dig deep to get to the facts with guests who
-        have been labeled villains by a society quick to judge, without actually
-        getting the full story. Tune in every Thursday to get to the truth with
-        another misunderstood outcast as they share the missing context in their
-        tragic tale.
+        How do we know what we know? How do we know what we--don't? Learn alongside hosts Brendan and Claire as they navigate the world of art, history, science, and pop culture through storytelling and conversation. Each episode, one host tells the other a story, and together they discuss the underlying themes, connections, and implications. For those who learn best through casual conversation, this is the podcast for you.
       </p>
       {!isExpanded && (
         <button
