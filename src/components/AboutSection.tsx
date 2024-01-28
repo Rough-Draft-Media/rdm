@@ -17,7 +17,7 @@ export function AboutSection(props: React.ComponentPropsWithoutRef<'section'>) {
           !isExpanded && 'lg:line-clamp-4',
         )}
       >
-        How do we know what we know? How do we know what we--don't? Learn alongside hosts Brendan and Claire as they navigate the world of art, history, science, and pop culture through storytelling and conversation. Each episode, one host tells the other a story, and together they discuss the underlying themes, connections, and implications. For those who learn best through casual conversation, this is the podcast for you.
+        How do we know what we know? How do we know what we--don&apos;t? Learn alongside hosts Brendan and Claire as they navigate the world of art, history, science, and pop culture through storytelling and conversation. Each episode, one host tells the other a story, and together they discuss the underlying themes, connections, and implications. For those who learn best through casual conversation, this is the podcast for you.
       </p>
       {!isExpanded && (
         <button

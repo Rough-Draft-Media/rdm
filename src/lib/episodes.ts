@@ -2,11 +2,10 @@ import { parse as parseFeed } from 'rss-to-json'
 import { array, number, object, parse, string } from 'valibot'
 
 export interface Episode {
-  id: number
+  id: string
   title: string
   published: Date
   description: string
-  content: string
   audio: {
     src: string
     type: string
@@ -17,11 +16,9 @@ export async function getAllEpisodes() {
   let FeedSchema = object({
     items: array(
       object({
-        id: number(),
         title: string(),
         published: number(),
         description: string(),
-        content: string(),
         enclosures: array(
           object({
             url: string(),
@@ -32,18 +29,16 @@ export async function getAllEpisodes() {
     ),
   })
 
-  let feed = (await parseFeed(
-    'https://their-side-feed.vercel.app/api/feed',
-  )) as unknown
+  let podcastFeed = 'https://anchor.fm/s/e1550c44/podcast/rss'
+  let feed = (await parseFeed(podcastFeed)) as unknown
   let items = parse(FeedSchema, feed).items
 
   let episodes: Array<Episode> = items.map(
-    ({ id, title, description, content, enclosures, published }) => ({
-      id,
-      title: `${id}: ${title}`,
+    ({ title, description, enclosures, published }) => ({
+      id: `${published}`,
+      title: `${title}`,
       published: new Date(published),
-      description,
-      content,
+      description: `${description}`,
       audio: enclosures.map((enclosure) => ({
         src: enclosure.url,
         type: enclosure.type,
