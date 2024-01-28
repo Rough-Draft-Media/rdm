@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import parse from 'html-react-parser';
 
 import { Container } from '@/components/Container'
 import { EpisodePlayButton } from '@/components/EpisodePlayButton'
@@ -28,6 +29,8 @@ function PlayIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
 function EpisodeEntry({ episode }: { episode: Episode }) {
   let date = new Date(episode.published)
 
+  let description = parse(episode.description)
+
   return (
     <article
       aria-labelledby={`episode-${episode.id}-title`}
@@ -45,9 +48,7 @@ function EpisodeEntry({ episode }: { episode: Episode }) {
             date={date}
             className="order-first font-mono text-sm leading-7 text-slate-500"
           />
-          <p className="mt-1 text-base leading-7 text-slate-700">
-            {episode.description}
-          </p>
+          <p>{episode.summary}</p>
           <div className="mt-4 flex items-center gap-4">
             <EpisodePlayButton
               episode={episode}

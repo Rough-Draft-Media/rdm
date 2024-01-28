@@ -5,6 +5,7 @@ export interface Episode {
   id: string
   title: string
   published: Date
+  summary: string
   description: string
   audio: {
     src: string
@@ -35,10 +36,11 @@ export async function getAllEpisodes() {
 
   let episodes: Array<Episode> = items.map(
     ({ title, description, enclosures, published }) => ({
-      id: `${published}`,
+      id: `ep` + `${title}`.match('([0-9]+)')?.[0] as string,
       title: `${title}`,
       published: new Date(published),
-      description: `${description}`,
+      summary: `${description}`.match('(?<=<p>)(.*?)(?=</p>)')?.[0] as string,
+      description: `${description}`.split('---')[0],
       audio: enclosures.map((enclosure) => ({
         src: enclosure.url,
         type: enclosure.type,
