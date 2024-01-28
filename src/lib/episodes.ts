@@ -1,6 +1,28 @@
 import { parse as parseFeed } from 'rss-to-json'
 import { array, number, object, parse, string } from 'valibot'
 
+export interface ShowDetails {
+  title: string
+  description: string
+  image: string
+}
+
+export async function getShowDetails() {
+  let FeedSchema = object({
+    title: string(),
+    description: string(),
+    image: string(),
+  })
+
+  let podcastFeed = 'https://anchor.fm/s/e1550c44/podcast/rss'
+  let feed = (await parseFeed(podcastFeed)) as unknown
+  let { title, description } = parse(FeedSchema, feed)
+
+  let details = { 'title': title, 'description': description }
+
+  return details
+}
+
 export interface Episode {
   id: string
   title: string
@@ -39,7 +61,7 @@ export async function getAllEpisodes() {
       id: `ep` + `${title}`.match('([0-9]+)')?.[0] as string,
       title: `${title}`,
       published: new Date(published),
-      summary: `${description}`.match('(?<=<p>)(.*?)(?=</p>)')?.[0] as string,
+      summary: `${description}`.match('(?<=<p>)(.*?)(?=</p>)')?.[0].replace(/(<([^>]+)>)/gi, "") as string,
       description: `${description}`.split('---')[0],
       audio: enclosures.map((enclosure) => ({
         src: enclosure.url,

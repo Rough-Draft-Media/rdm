@@ -1,11 +1,13 @@
+'use client'
 import { Fragment } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-
+import { useState } from 'react'
+import { useEffect } from 'react'
 import { AboutSection } from '@/components/AboutSection'
 import { AudioProvider } from '@/components/AudioProvider'
 import { AudioPlayer } from '@/components/player/AudioPlayer'
-import { TinyWaveFormIcon } from '@/components/TinyWaveFormIcon'
+import { getShowDetails } from '@/lib/episodes'
 import posterImage from '@/images/poster.png'
 
 function SpotifyIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
@@ -63,6 +65,15 @@ export default function MainLayout({
 }) {
   let hosts = ['Brendan Keane', 'Claire Kurronen']
 
+  const [showDetails, setShowDetails] = useState({ title: '', description: '' });
+  useEffect(() => {
+    async function getDetails() {
+      const showDetails = await getShowDetails()
+      setShowDetails(showDetails);
+    }
+    getDetails()
+  }, [])
+
   return (
     <AudioProvider>
       <header className="bg-slate-50 lg:fixed lg:inset-y-0 lg:left-0 lg:flex lg:w-112 lg:items-start lg:overflow-y-auto xl:w-120">
@@ -97,9 +108,9 @@ export default function MainLayout({
             <div className="absolute inset-0 rounded-lg ring-1 ring-inset ring-black/10 sm:rounded-xl lg:rounded-2xl" />
           </Link>
           <div className="mt-10 text-center lg:mt-12 lg:text-left">
-            <h1 className="text-xl font-bold text-slate-900">Can I Tell You Something?</h1>
-            <p className="mt-3 text-lg font-medium leading-8 text-slate-700">
-              Thursdays at 3:00 PM PST
+            <h1 className="text-xl font-bold text-slate-900">{showDetails.title}</h1>
+            <p className="mt-3 text-sm font-medium leading-8 text-slate-700">
+              <span className="bg-yellow-300 text-sm font-bold py-0.5 px-1 rounded">New episodes</span> Thursdays at 3:00 PM PST
             </p>
           </div>
           <AboutSection className="mt-12 hidden lg:block" />
@@ -112,15 +123,15 @@ export default function MainLayout({
             >
               {(
                 [
-                  ['Spotify', SpotifyIcon],
-                  ['Apple Podcast', ApplePodcastIcon],
-                  ['Overcast', OvercastIcon],
-                  ['RSS Feed', RSSIcon],
+                  ['Spotify', SpotifyIcon, 'https://open.spotify.com/show/2O8i5jqwmPKlA5NZRZge6h?si=903545f626aa49c4'],
+                  ['Apple Podcast', ApplePodcastIcon, 'https://podcasts.apple.com/us/podcast/can-i-tell-you-something/id1694638369'],
+                  ['Overcast', OvercastIcon, 'https://www.youtube.com/@canitellyousmthpodcast'],
+                  ['RSS Feed', RSSIcon, 'https://anchor.fm/s/e1550c44/podcast/rss'],
                 ] as const
-              ).map(([label, Icon]) => (
+              ).map(([label, Icon, href]) => (
                 <li key={label} className="flex">
                   <Link
-                    href="/"
+                    href={href}
                     className="group flex items-center"
                     aria-label={label}
                   >

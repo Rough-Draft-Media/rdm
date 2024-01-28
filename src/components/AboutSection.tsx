@@ -1,15 +1,28 @@
 'use client'
-
+import { useEffect } from 'react'
+import { cache } from 'react'
+import { notFound } from 'next/navigation'
 import { useState } from 'react'
 import clsx from 'clsx'
+import { getShowDetails } from '@/lib/episodes'
 
-import { TinyWaveFormIcon } from '@/components/TinyWaveFormIcon'
 
 export function AboutSection(props: React.ComponentPropsWithoutRef<'section'>) {
-  let [isExpanded, setIsExpanded] = useState(false)
+  let [isExpanded, setIsExpanded] = useState(false);
+
+  // Fetches show description directly from RSS feed
+  const [showDetails, setShowDetails] = useState({ title: '', description: '' });
+  useEffect(() => {
+    async function getDetails() {
+      const showDetails = await getShowDetails()
+      setShowDetails(showDetails);
+    }
+    getDetails()
+  }, [])
 
   return (
     <section {...props}>
+      <p></p>
       <h2 className="flex items-center text-xl font-extrabold leading-7 text-slate-900">About</h2>
       <p
         className={clsx(
@@ -17,7 +30,7 @@ export function AboutSection(props: React.ComponentPropsWithoutRef<'section'>) {
           !isExpanded && 'lg:line-clamp-4',
         )}
       >
-        How do we know what we know? How do we know what we--don&apos;t? Learn alongside hosts Brendan and Claire as they navigate the world of art, history, science, and pop culture through storytelling and conversation. Each episode, one host tells the other a story, and together they discuss the underlying themes, connections, and implications. For those who learn best through casual conversation, this is the podcast for you.
+        {showDetails.description}
       </p>
       {!isExpanded && (
         <button
